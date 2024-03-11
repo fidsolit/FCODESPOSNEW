@@ -1,3 +1,5 @@
+
+
 const getProducts = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/products", {

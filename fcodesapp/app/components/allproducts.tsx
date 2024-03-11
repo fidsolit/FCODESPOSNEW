@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import RemoveBtn from "./removeBtn";
+import { useRouter } from "next/navigation";
+// import Productlist from "./productlist";
 
 const getallProducts = async () => {
   try {
@@ -55,7 +58,7 @@ export default async function AllProduct() {
           </thead>
           {products.map((p) => (
             <tbody key={p._id}>
-              {/* row 1 */}
+              {/* //   row 1 */}
               <tr className="hover:bg-slate-200">
                 <th>
                   <label>
@@ -63,7 +66,12 @@ export default async function AllProduct() {
                   </label>
                 </th>
                 <td>
-                  <div className="flex items-center gap-3">
+                  <div
+                    className="flex items-center gap-3"
+                    onClick={() => {
+                      console.log("you have click ", p._id);
+                    }}
+                  >
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
@@ -85,7 +93,7 @@ export default async function AllProduct() {
                     Desktop Support Technician
                   </span> */}
                 </td>
-                <td>12000</td>
+                <td>{p.sellingprice}</td>
                 <th>
                   <RemoveBtn id={p._id} />
                   <Link href={`/updateProduct/${p._id}`}>
@@ -97,6 +105,7 @@ export default async function AllProduct() {
                 </th>
               </tr>
             </tbody>
+            // <Productlist key={p.id} props={p} />
           ))}
           {/* foot */}
           <tfoot>

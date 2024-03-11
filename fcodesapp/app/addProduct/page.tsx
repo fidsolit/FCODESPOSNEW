@@ -53,7 +53,7 @@ export default function addProduct() {
       });
 
       if (res.ok) {
-        router.push("/");
+        router.push("/admindashboard");
         router.refresh();
       } else {
         throw new Error("Failed to create a product");

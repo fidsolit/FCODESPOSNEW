@@ -1,6 +1,6 @@
 import AllProduct from "../components/allproducts";
 
-export default function () {
+export default function AdminDashboard() {
   return (
     <>
       <AllProduct />
