@@ -1,6 +1,24 @@
+"use client";
+
 import React from "react";
 
-const ProductDescription = () => {
+// const getProductDetails = async () => {
+//   try {
+//     const res = await fetch("http://localhost:3000/api/products", {
+//       cache: "no-store",
+//     });
+
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch topics");
+//     }
+
+//     return res.json();
+//   } catch (error) {
+//     console.log("error lodading topics cause: ", error);
+//   }
+// };
+
+export default function ProductDescription({ id, brand, description }) {
   // Sample product data
   const product = {
     name: "Sample Product",
@@ -63,6 +81,4 @@ const ProductDescription = () => {
       `}</style>
     </div>
   );
-};
-
-export default ProductDescription;
+}

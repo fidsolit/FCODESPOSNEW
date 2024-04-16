@@ -1,4 +1,5 @@
-
+"use client";
+import Link from "next/link";
 
 const getProducts = async () => {
   try {
@@ -33,12 +34,16 @@ export default async function Product() {
             <h2 className="card-title">{p.brand}</h2>
             <p>{p.description}</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary max-sm:mx-auto">
-                See details
-              </button>
-              <button className="btn btn-primary max-sm:mx-auto">
-                Buy Now
-              </button>
+              <Link href={`/productDetails/${p._id}`}>
+                <button className="btn btn-primary max-sm:mx-auto">
+                  See details
+                </button>
+              </Link>
+              <Link href={"/checkoutForm"}>
+                <button className="btn btn-primary max-sm:mx-auto">
+                  Buy Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
