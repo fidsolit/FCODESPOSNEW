@@ -22,7 +22,7 @@ export default function EditProductForm({ id, brand, description }) {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to update topic");
+        throw new Error("Failed to update product");
       }
 
       router.push("/admindashboard");

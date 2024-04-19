@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import Footer from "./components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Navbar isLoggedIn={false} onLogout={true} />
         {children}
         {/* </Provider> */}
+        <Footer />
       </body>
     </html>
   );
