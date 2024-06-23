@@ -20,6 +20,19 @@ export default async function EditTopic({ params }) {
   const { id } = params;
   const { product } = await getProductById(id);
   const { brand, description } = product;
+  //  brand: String,
+  //   description: String,
+  //   sellingprice: String,
+  //   unitprice: String,
+  //   availableqty: String,
+  //   sku: String,
+  //   ram: String,
+  //   Videocard: String,
+  //   storage: String,
+  //   color: String,
+  //   inches: String,
+  //   Freebies: String,
+  //   Warranty: String,
 
   return <EditProductForm id={id} brand={brand} description={description} />;
 }
