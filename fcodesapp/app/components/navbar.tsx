@@ -12,6 +12,9 @@ export default function Navbar({ isLoggedIn, onLogout }) {
       <Link href={"/store"} className="mx-3 p-3 font-bold">
         STORE
       </Link>
+      <Link href={"/pages/About"} className="mx-3 p-3 font-bold">
+        About
+      </Link>
       {isLoggedIn ? (
         <button onClick={onLogout} className="mx-3 p-3  font-bold">
           Logout
