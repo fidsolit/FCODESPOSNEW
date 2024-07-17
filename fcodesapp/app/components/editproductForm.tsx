@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function EditProductForm({ id, brand, description }) {
+export default function EditProductForm({ id: , brand, description }) {
   const [newbrand, setNewbrand] = useState(brand);
   const [newDescription, setNewDescription] = useState(description);
 
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
 
     try {

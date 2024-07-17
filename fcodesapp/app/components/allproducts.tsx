@@ -57,7 +57,7 @@ export default async function AllProduct() {
               <th>ACTION</th>
             </tr>
           </thead>
-          {products.map((p) => (
+          {products.map((p: String) => (
             <tbody key={p._id}>
               {/* //   row 1 */}
               <tr className="hover:bg-slate-200">
