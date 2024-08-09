@@ -14,7 +14,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
       <div className="container mx-auto px-4 flex justify-between items-center py-3">
         <Link href={"/"} className="flex items-center">
           <img src="fcodeslogo.png" width={40} height={40} alt="Logo" />
-          <span className="ml-2 text-xl font-bold">MySite</span>
+          {/* <span className="ml-2 text-xl font-bold">MySite</span> */}
         </Link>
         <div className="hidden md:flex space-x-6">
           <Link
