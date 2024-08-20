@@ -1,15 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-export default function EditProductForm({ id, brand, description }) {
-  const [newbrand, setNewbrand] = useState(brand);
-  const [newDescription, setNewDescription] = useState(description);
+interface EditProductFormProps {
+  id: string;
+  brand: string;
+  description: string;
+}
+
+export default function EditProductForm({
+  id,
+  brand,
+  description,
+}: EditProductFormProps) {
+  const [newBrand, setNewBrand] = useState<string>(brand);
+  const [newDescription, setNewDescription] = useState<string>(description);
 
   const router = useRouter();
 
-  const handleSubmit = async (e: Event) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
@@ -18,7 +28,7 @@ export default function EditProductForm({ id, brand, description }) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ newbrand, newDescription }),
+        body: JSON.stringify({ brand: newBrand, description: newDescription }),
       });
 
       if (!res.ok) {
@@ -35,76 +45,13 @@ export default function EditProductForm({ id, brand, description }) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <input
-        onChange={(e) => setNewbrand(e.target.value)}
-        value={newbrand}
+        onChange={(e) => setNewBrand(e.target.value)}
+        value={newBrand}
         className="border border-slate-500 px-8 py-2"
         type="text"
         placeholder="Topic Title"
       />
 
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Topic Description"
-      />
       <input
         onChange={(e) => setNewDescription(e.target.value)}
         value={newDescription}
