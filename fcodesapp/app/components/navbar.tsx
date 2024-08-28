@@ -10,7 +10,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
   };
 
   return (
-    <nav className="bg-slate-200 shadow-md fixed w-full z-50">
+    <nav className="bg-slate-200  shadow-md fixed w-full  z-50">
       <div className="container mx-auto px-4 flex justify-between items-center py-3">
         <Link href={"/"} className="flex items-center">
           <img src="fcodeslogo.png" width={40} height={40} alt="Logo" />

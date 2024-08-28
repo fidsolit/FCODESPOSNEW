@@ -25,7 +25,7 @@ export default async function Product() {
       {products.map((p) => (
         <div
           key={p._id}
-          className="card bg-base-100 shadow-xl m-3 max-sm:mx-2 w-full md:w-1/2 lg:w-1/4 "
+          className="card bg-base-100 shadow-xl mt-10 max-sm:mx-2 w-full md:w-1/2 lg:w-1/4 "
         >
           <figure>
             <img src="1.jfif" alt="Shoes" />

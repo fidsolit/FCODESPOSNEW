@@ -26,7 +26,7 @@ export default async function AllProduct() {
   const { products } = await getallProducts();
 
   return (
-    <div className="md:w-1/2 mx-auto shadow mt-4">
+    <div className="md:w-1/2 mx-auto shadow mt-10">
       <div className="overflow-x-auto">
         <Link
           className="mx-2 my-3  p-2 font-bold bg-cyan-700 border-emerald-600"
