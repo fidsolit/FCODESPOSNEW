@@ -4,7 +4,6 @@ export default function AdminDashboard() {
   return (
     <>
       <AllProduct />
-      <>admin</>
     </>
   );
 }
