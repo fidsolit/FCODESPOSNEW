@@ -1,6 +1,4 @@
 // components/ThermalPrinter.js
-
-"use client";
 import { useEffect } from "react";
 
 const ThermalPrinter = () => {
@@ -18,7 +16,11 @@ const ThermalPrinter = () => {
 
         // Send ESC/POS commands to the printer
         const encoder = new TextEncoder();
-        const command = encoder.encode("Hello, thermal printer!\n");
+        const command = encoder.encode(
+          "Hello, thermal printer!\n",
+          "fcodes test print\n"
+        );
+
         await device.transferOut(1, command); // Replace with your interface number
 
         console.log("Printed successfully");

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ThermalPrinter from "../components/ThermalPrinter.js";
 
 export default function checkoutForm() {
   const [FormData, setFormData] = useState({
@@ -8,7 +9,16 @@ export default function checkoutForm() {
     city: "",
     contact: "",
   });
-  function handleNextbtn() {}
+  function handleNextbtn() {
+    return (
+      <div>
+        <h1>handlenextubtn</h1>
+      </div>
+    );
+  }
+  function handleprintbtn() {
+    return 1;
+  }
 
   return (
     <div className="max-w-lg mx-auto lg:mt-10">
@@ -108,6 +118,15 @@ export default function checkoutForm() {
             >
               Next
             </button>
+            {/* <button
+              type="submit"
+              id="nextBtn"
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none"
+              onClick={handleprintbtn}
+            >
+              PRINT RECEIPT
+            </button> */}
+            <ThermalPrinter />
           </div>
         </form>
       </div>
