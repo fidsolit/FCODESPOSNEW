@@ -1,38 +1,44 @@
-// components/ThermalPrinter.js
-import { useEffect } from "react";
+import React from "react";
+import printJS from "print-js";
 
 const ThermalPrinter = () => {
-  useEffect(() => {
-    const connectToPrinter = async () => {
-      try {
-        // Request USB access
-        const device = await navigator.usb.requestDevice({
-          filters: [{ vendorId: 0x1234 }], // Replace with your printer's vendorId
-        });
+  // Function to handle printing
+  const handlePrint = () => {
+    printJS({
+      printable: "printable-content", // ID of the element to print
+      type: "html",
+      style: `
+        body { font-size: 12px; } /* Adjust for thermal printer */
+        table { width: 100%; }
+      `,
+    });
+  };
 
-        await device.open(); // Open the device
-        await device.selectConfiguration(1); // Select the first configuration
-        await device.claimInterface(0); // Claim the interface
+  return (
+    <div>
+      {/* Content to be printed */}
+      <div id="printable-content">
+        <h1>Your Data</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data 1</td>
+              <td>Data 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        // Send ESC/POS commands to the printer
-        const encoder = new TextEncoder();
-        const command = encoder.encode(
-          "Hello, thermal printer!\n",
-          "fcodes test print\n"
-        );
-
-        await device.transferOut(1, command); // Replace with your interface number
-
-        console.log("Printed successfully");
-      } catch (error) {
-        console.error("Failed to connect to printer:", error);
-      }
-    };
-
-    connectToPrinter();
-  }, []);
-
-  return <button onClick={connectToPrinter}>Print Receipt</button>;
+      {/* Button to trigger printing */}
+      <button onClick={handlePrint}>Print</button>
+    </div>
+  );
 };
 
 export default ThermalPrinter;
