@@ -2,123 +2,174 @@
 import Link from "next/link";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import RemoveBtn from "./removeBtn";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
-// import Productlist from "./productlist";
+// Define a type for the product
+interface Product {
+  _id: string;
+  brand: string;
+  description: string;
+  sellingprice: number;
+}
 
-const getallProducts = async () => {
+// Define a type for the API response
+interface ProductResponse {
+  products: Product[];
+}
+
+// Fetch products from the API
+const getallProducts = async (): Promise<ProductResponse | undefined> => {
   try {
     const res = await fetch("http://localhost:3000/api/products", {
       cache: "no-store",
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch topics");
+      throw new Error("Failed to fetch products");
     }
 
     return res.json();
   } catch (error) {
-    console.log("error lodading topics cause: ", error);
+    console.log("error loading products cause: ", error);
   }
 };
 
-export default async function AllProduct() {
-  const { products } = await getallProducts();
+export default function AllProduct() {
+  // State for products and filtered products
+  const [products, setProducts] = useState<Product[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const productsPerPage = 5;
+
+  // Fetch products on component mount
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const result = await getallProducts();
+      if (result) {
+        setProducts(result.products);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  // Filter products based on search query
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter((p) =>
+        p.brand.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, products]);
+
+  // Calculate pagination
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="md:w-1/2 md:mt-20 mx-auto  shadow mt-10">
-      <div className="overflow-x-auto">
+    <div className="md:w-3/4 lg:w-2/3 mx-auto mt-10 shadow-lg rounded-lg bg-white p-5">
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-semibold text-gray-800">Product List</h1>
         <Link
-          className="mx-2 my-3  p-2 font-bold bg-cyan-700 border-emerald-600"
-          href={"/addProduct"}
+          className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-400 transition"
+          href="/addProduct"
         >
-          {" "}
           ADD NEW
         </Link>
+      </div>
 
+      <div className="mb-4">
         <input
-          className="p-2 mx-2 my-3 "
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
-          placeholder="search product"
+          placeholder="Search product by brand"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
+      </div>
 
-        <table className="table">
-          {/* head */}
-          <thead>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+          <thead className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>BRAND</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>ACTION</th>
+              <th className="px-6 py-3 text-left font-medium">Select</th>
+              <th className="px-6 py-3 text-left font-medium">BRAND</th>
+              <th className="px-6 py-3 text-left font-medium">Description</th>
+              <th className="px-6 py-3 text-left font-medium">Price</th>
+              <th className="px-6 py-3 text-left font-medium">ACTION</th>
             </tr>
           </thead>
-          {products.map((p: String) => (
-            <tbody key={p._id}>
-              {/* //   row 1 */}
-              <tr className="hover:bg-slate-200">
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
-                <td>
-                  <div
-                    className="flex items-center gap-3"
-                    onClick={() => {
-                      console.log("you have click ", p._id);
-                    }}
-                  >
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src="/1.jfif"
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
+
+          <tbody>
+            {currentProducts.map((p) => (
+              <tr
+                key={p._id}
+                className="hover:bg-blue-100 border-b border-gray-200"
+              >
+                <td className="px-6 py-4 text-center">
+                  <input type="checkbox" className="checkbox" />
+                </td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center">
+                      <img
+                        src="/1.jfif"
+                        alt="Product"
+                        className="w-full h-full object-cover rounded-full"
+                      />
                     </div>
-                    <div>
-                      <div className="font-bold">{p.brand}</div>
-                      {/* <div className="text-sm opacity-50">United States</div> */}
-                    </div>
+                    <div className="font-semibold text-gray-800">{p.brand}</div>
                   </div>
                 </td>
-                <td>
-                  {p.description}
-                  <br />
-                  {/* <span className="badge badge-ghost badge-sm">
-                    Desktop Support Technician
-                  </span> */}
+                <td className="px-6 py-4 text-gray-700">{p.description}</td>
+                <td className="px-6 py-4 text-green-500 font-semibold">
+                  ${p.sellingprice.toFixed(2)}
                 </td>
-                <td>{p.sellingprice}</td>
-                <th>
-                  <RemoveBtn id={p._id} />
-                  <Link href={`/updateProduct/${p._id}`}>
-                    {/* <button className="btn btn-ghost btn-xs"> */}
-                    <button className="hover:scale-125">
-                      <HiOutlinePencilSquare size={25} />
-                    </button>
-                  </Link>
-                </th>
+                <td className="px-6 py-4">
+                  <div className="flex items-center space-x-4">
+                    <RemoveBtn id={p._id} />
+                    <Link href={`/updateProduct/${p._id}`}>
+                      <button className="hover:scale-110 transition transform">
+                        <HiOutlinePencilSquare
+                          size={25}
+                          className="text-blue-600"
+                        />
+                      </button>
+                    </Link>
+                  </div>
+                </td>
               </tr>
-            </tbody>
-            // <Productlist key={p.id} props={p} />
-          ))}
-          {/* foot */}
-          <tfoot>
-            <tr>
-              <th></th>
-              <th>BRAND</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>ACTION</th>
-            </tr>
-          </tfoot>
+            ))}
+          </tbody>
         </table>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-6 space-x-2">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`px-4 py-2 rounded-lg transition ${
+                currentPage === index + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

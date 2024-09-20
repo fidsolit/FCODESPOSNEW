@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="relative bg-blueGray-200 pt-8 pb-6  ">
@@ -21,7 +23,7 @@ export default function Footer() {
                 className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                 type="button"
               >
-                <i className="fab fa-facebook-square" />
+                <i className="fa fa-facebook" />
               </button>
               <button
                 className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
@@ -45,12 +47,12 @@ export default function Footer() {
                 </span>
                 <ul className="list-unstyled">
                   <li>
-                    <a
+                    <Link
                       className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://www.creative-tim.com/presentation?ref=njs-profile"
+                      href="/pages/About"
                     >
                       About Us
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a
