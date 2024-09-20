@@ -134,7 +134,8 @@ export default function AllProduct() {
                 </td>
                 <td className="px-6 py-4 text-gray-700">{p.description}</td>
                 <td className="px-6 py-4 text-green-500 font-semibold">
-                  ${p.sellingprice.toFixed(2)}
+                  {/* php{p.sellingprice.toFixed(2)} */}
+                  10000
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center space-x-4">

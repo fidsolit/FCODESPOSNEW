@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// Define the props interface
 interface EditProductFormProps {
   id: string;
   brand: string;
@@ -50,11 +49,15 @@ export default function EditProductForm({
   const [newInches, setNewInches] = useState<string>(inches);
   const [newFreebies, setNewFreebies] = useState<string>(Freebies);
   const [newWarranty, setNewWarranty] = useState<string>(Warranty);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
 
     try {
       const res = await fetch(`http://localhost:3000/api/products/${id}`, {
@@ -86,105 +89,65 @@ export default function EditProductForm({
       router.push("/admindashboard");
       router.refresh();
     } catch (error) {
+      setError("An error occurred. Please try again.");
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <input
-        onChange={(e) => setNewBrand(e.target.value)}
-        value={newBrand}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Brand"
-      />
-      <input
-        onChange={(e) => setNewDescription(e.target.value)}
-        value={newDescription}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Description"
-      />
-      <input
-        onChange={(e) => setNewSellingPrice(e.target.value)}
-        value={newSellingPrice}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Selling Price"
-      />
-      <input
-        onChange={(e) => setNewUnitPrice(e.target.value)}
-        value={newUnitPrice}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Unit Price"
-      />
-      <input
-        onChange={(e) => setNewAvailableQty(e.target.value)}
-        value={newAvailableQty}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Available Quantity"
-      />
-      <input
-        onChange={(e) => setNewSku(e.target.value)}
-        value={newSku}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="SKU"
-      />
-      <input
-        onChange={(e) => setNewRam(e.target.value)}
-        value={newRam}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="RAM"
-      />
-      <input
-        onChange={(e) => setNewVideocard(e.target.value)}
-        value={newVideocard}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Videocard"
-      />
-      <input
-        onChange={(e) => setNewStorage(e.target.value)}
-        value={newStorage}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Storage"
-      />
-      <input
-        onChange={(e) => setNewColor(e.target.value)}
-        value={newColor}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Color"
-      />
-      <input
-        onChange={(e) => setNewInches(e.target.value)}
-        value={newInches}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Inches"
-      />
-      <input
-        onChange={(e) => setNewFreebies(e.target.value)}
-        value={newFreebies}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Freebies"
-      />
-      <input
-        onChange={(e) => setNewWarranty(e.target.value)}
-        value={newWarranty}
-        className="border border-slate-500 px-8 py-2"
-        type="text"
-        placeholder="Warranty"
-      />
-      <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit">
-        Update product
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 p-4 border rounded-lg shadow-lg bg-white"
+    >
+      <h2 className="text-xl font-bold text-center mb-4">Edit Product</h2>
+      {error && <div className="text-red-600 mb-2">{error}</div>}
+      {[
+        { label: "Brand", value: newBrand, setter: setNewBrand },
+        {
+          label: "Description",
+          value: newDescription,
+          setter: setNewDescription,
+        },
+        {
+          label: "Selling Price",
+          value: newSellingPrice,
+          setter: setNewSellingPrice,
+        },
+        { label: "Unit Price", value: newUnitPrice, setter: setNewUnitPrice },
+        {
+          label: "Available Quantity",
+          value: newAvailableQty,
+          setter: setNewAvailableQty,
+        },
+        { label: "SKU", value: newSku, setter: setNewSku },
+        { label: "RAM", value: newRam, setter: setNewRam },
+        { label: "Videocard", value: newVideocard, setter: setNewVideocard },
+        { label: "Storage", value: newStorage, setter: setNewStorage },
+        { label: "Color", value: newColor, setter: setNewColor },
+        { label: "Inches", value: newInches, setter: setNewInches },
+        { label: "Freebies", value: newFreebies, setter: setNewFreebies },
+        { label: "Warranty", value: newWarranty, setter: setNewWarranty },
+      ].map(({ label, value, setter }) => (
+        <div key={label} className="flex flex-col">
+          <label className="mb-1 text-gray-700">{label}</label>
+          <input
+            onChange={(e) => setter(e.target.value)}
+            value={value}
+            className="border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500 transition"
+            type="text"
+            placeholder={label}
+          />
+        </div>
+      ))}
+      <button
+        className={`bg-green-600 font-bold text-white py-3 px-6 w-full rounded-lg transition duration-200 hover:bg-green-500 ${
+          loading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        disabled={loading}
+      >
+        {loading ? "Updating..." : "Update Product"}
       </button>
     </form>
   );
