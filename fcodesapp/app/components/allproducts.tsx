@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import RemoveBtn from "./removeBtn";
 import { useState, useEffect } from "react";
+import { PHASE_PRODUCTION_BUILD } from "next/dist/shared/lib/constants";
 
 // Define a type for the product
 interface Product {
@@ -135,7 +136,7 @@ export default function AllProduct() {
                 <td className="px-6 py-4 text-gray-700">{p.description}</td>
                 <td className="px-6 py-4 text-green-500 font-semibold">
                   {/* php{p.sellingprice.toFixed(2)} */}
-                  10000
+                  php {p.sellingprice.toString()}
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center space-x-4">

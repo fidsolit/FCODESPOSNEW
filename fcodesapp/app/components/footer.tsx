@@ -2,78 +2,78 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-blueGray-200 pt-8 pb-6  ">
+    <footer className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white pt-10 pb-6">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap text-left lg:text-left">
           <div className="w-full lg:w-6/12 px-4">
-            <h4 className="text-3xl fonat-semibold text-blueGray-700">
-              Let's keep in touch!
+            <h4 className="text-4xl font-bold text-white mb-4">
+              Stay Connected!
             </h4>
-            <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
-              Find us on any of these platforms, we respond 1-2 business days.
+            <h5 className="text-lg mt-0 mb-6 text-gray-300">
+              Follow us on social media. We respond within 1-2 business days.
             </h5>
-            <div className="mt-6 lg:mb-0 mb-6">
-              <button
-                className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
+            <div className="mt-6 flex space-x-4">
+              <a
+                href="https://twitter.com"
+                className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full hover:bg-blue-400 hover:text-white transition-colors duration-300"
               >
                 <i className="fab fa-twitter" />
-              </button>
-              <button
-                className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
+              </a>
+              <a
+                href="https://facebook.com"
+                className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full hover:bg-blue-600 hover:text-white transition-colors duration-300"
               >
-                <i className="fa fa-facebook" />
-              </button>
-              <button
-                className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
+                <i className="fab fa-facebook" />
+              </a>
+              <a
+                href="https://dribbble.com"
+                className="bg-white text-pink-500 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full hover:bg-pink-500 hover:text-white transition-colors duration-300"
               >
                 <i className="fab fa-dribbble" />
-              </button>
-              <button
-                className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-                type="button"
+              </a>
+              <a
+                href="https://github.com"
+                className="bg-white text-gray-800 shadow-lg font-normal h-10 w-10 flex items-center justify-center rounded-full hover:bg-gray-800 hover:text-white transition-colors duration-300"
               >
                 <i className="fab fa-github" />
-              </button>
+              </a>
             </div>
           </div>
           <div className="w-full lg:w-6/12 px-4">
-            <div className="flex flex-wrap items-top mb-6">
+            <div className="flex flex-wrap mb-6">
               <div className="w-full lg:w-4/12 px-4 ml-auto">
-                <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
+                <span className="block uppercase text-gray-400 text-sm font-semibold mb-4">
                   Useful Links
                 </span>
-                <ul className="list-unstyled">
+                <ul className="list-unstyled space-y-2">
                   <li>
                     <Link
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
                       href="/pages/About"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       About Us
                     </Link>
                   </li>
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://blog.creative-tim.com?ref=njs-profile"
+                      href="https://blog.creative-tim.com"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       Blog
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://www.github.com/creativetimofficial?ref=njs-profile"
+                      href="https://github.com/creativetimofficial"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       Github
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile"
+                      href="https://www.creative-tim.com/bootstrap-themes/free"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       Free Products
                     </a>
@@ -81,38 +81,38 @@ export default function Footer() {
                 </ul>
               </div>
               <div className="w-full lg:w-4/12 px-4">
-                <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
+                <span className="block uppercase text-gray-400 text-sm font-semibold mb-4">
                   Other Resources
                 </span>
-                <ul className="list-unstyled">
+                <ul className="list-unstyled space-y-2">
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile"
+                      href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       MIT License
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://creative-tim.com/terms?ref=njs-profile"
+                      href="https://creative-tim.com/terms"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
-                      Terms &amp; Conditions
+                      Terms & Conditions
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://creative-tim.com/privacy?ref=njs-profile"
+                      href="https://creative-tim.com/privacy"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       Privacy Policy
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://creative-tim.com/contact-us?ref=njs-profile"
+                      href="https://creative-tim.com/contact-us"
+                      className="text-gray-300 hover:text-white font-semibold transition-colors"
                     >
                       Contact Us
                     </a>
@@ -122,26 +122,27 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-blueGray-300" />
-        <div className="flex flex-wrap items-center md:justify-between justify-center">
+        <hr className="my-6 border-gray-600" />
+        <div className="flex flex-wrap items-center justify-between">
           <div className="w-full md:w-4/12 px-4 mx-auto text-center">
-            <div className="text-sm text-blueGray-500 font-semibold py-1">
-              Copyright © <span id="get-current-year">2024</span>
+            <div className="text-sm text-gray-400 font-semibold py-1">
+              &copy; {new Date().getFullYear()}{" "}
               <a
                 href="https://www.facebook.com/FCodesCompany"
-                className="text-blueGray-500 hover:text-gray-800"
+                className="text-white hover:text-gray-300 transition-colors"
                 target="_blank"
+                rel="noopener noreferrer"
               >
-                {" "}
                 FCODES BY{" "}
               </a>
               <a
                 href="https://www.facebook.com/PARDILLONABLEFIDELITO/"
-                className="text-blueGray-500 hover:text-blueGray-800"
+                className="text-white hover:text-gray-300 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 FIDEL
               </a>
-              .
             </div>
           </div>
         </div>
