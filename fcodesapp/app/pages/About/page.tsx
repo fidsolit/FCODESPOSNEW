@@ -2,10 +2,11 @@ import Link from "next/link";
 import React from "react";
 
 const About = () => {
-  console.log("your in about page");
+  console.log("You're on the about page");
+
   return (
     <div>
-      {" "}
+      {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-screen"
         style={{ backgroundImage: 'url("/images/hero-bg.jpg")' }}
@@ -37,7 +38,7 @@ const About = () => {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-10 flex justify-center w-full">
-          <a href="#products" className="text-white animate-bounce">
+          <a href="#mission" className="text-white animate-bounce">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8"
@@ -53,6 +54,40 @@ const About = () => {
               />
             </svg>
           </a>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section id="mission" className="py-16 px-6 bg-white text-gray-800">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-extrabold text-center mb-6">
+            Our Mission
+          </h2>
+          <p className="text-lg leading-relaxed max-w-4xl mx-auto text-center">
+            "Our mission at FCODES is to make technology work for you. We
+            provide high-quality computer supplies, software solutions, and
+            services that help you navigate the digital world with ease. Whether
+            you’re looking for the right hardware, the perfect software, or
+            expert support, we’re here to guide you every step of the way with
+            friendly, knowledgeable service."
+          </p>
+        </div>
+      </section>
+
+      {/* Vision Section */}
+      <section id="vision" className="py-16 px-6 bg-gray-100 text-gray-800">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-extrabold text-center mb-6">
+            Our Vision
+          </h2>
+          <p className="text-lg leading-relaxed max-w-4xl mx-auto text-center">
+            "Our vision is to be the go-to tech partner for both individuals and
+            businesses. We aim to create a seamless tech experience by offering
+            everything you need under one roof—from the latest hardware to
+            cutting-edge software and reliable support. At FCODES, we’re
+            dedicated to helping our customers stay ahead in an ever-evolving
+            digital landscape, fostering growth, and driving innovation."
+          </p>
         </div>
       </section>
     </div>
