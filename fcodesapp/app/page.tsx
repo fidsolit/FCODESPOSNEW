@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Home() {
@@ -22,19 +21,24 @@ export default function Home() {
     },
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
+  // Automatically change slides every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   return (
     <div className="flex h-screen justify-center bg-slate-700 items-center">
-      <div className="relative w-full max-w-4xl mx-auto overflow-hidden">
+      <div className="relative w-full max-w-6xl mx-auto overflow-hidden">
+        {/* Company Name in the Middle */}
+        {/* <div className="absolute inset-0 z-20 flex justify-center items-center text-center">
+          <h1 className="text-white text-6xl font-bold opacity-90">FCODES</h1>
+        </div> */}
+
         {/* Carousel Images */}
-        <div className="relative h-[500px] w-full">
+        <div className="relative h-[700px] w-full">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -53,7 +57,7 @@ export default function Home() {
                 className="rounded-lg shadow-lg"
               />
               {/* Caption */}
-              {/* <div className="absolute bottom-10 left-0 w-full text-center">
+              {/* <div className="absolute bottom-10 left-0 w-full text-center z-10">
                 <p className="text-white text-2xl font-bold bg-black bg-opacity-50 py-2 rounded-lg">
                   {slide.caption}
                 </p>
@@ -62,48 +66,8 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Next/Previous Buttons */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 p-3 bg-gray-800 bg-opacity-50 text-white rounded-full hover:bg-opacity-75"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 p-3 bg-gray-800 bg-opacity-50 text-white rounded-full hover:bg-opacity-75"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-
         {/* Carousel Indicators */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-3">
+        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-3 z-10">
           {slides.map((_, index) => (
             <button
               key={index}

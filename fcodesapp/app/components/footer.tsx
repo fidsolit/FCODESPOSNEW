@@ -1,6 +1,27 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
+  const [currentLogo, setCurrentLogo] = useState(0);
+
+  const logos = [
+    { src: "/companylogos/company1.jpg", alt: "Noondalton" },
+    { src: "/companylogos/company2.jpg", alt: "JJ graphics design services" },
+    { src: "/companylogos/company3.jpg", alt: "smarties clothing" },
+    { src: "/companylogos/company3.jpg", alt: "smarties clothing" },
+  ];
+
+  // Automatically change logos every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLogo((prev) => (prev === logos.length - 1 ? 0 : prev + 1));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [logos.length]);
+
   return (
     <footer className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white pt-10 pb-6">
       <div className="container mx-auto px-4">
@@ -122,6 +143,35 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Logo Carousel for satisfied companies */}
+        <div className="my-8">
+          <h4 className="text-2xl font-bold text-center mb-6">
+            Satisfied Companies
+          </h4>
+          <div className="relative h-[120px] flex justify-center items-center overflow-hidden">
+            {logos.map((logo, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
+                  index === currentLogo ? "translate-x-0" : "translate-x-full"
+                }`}
+                style={{
+                  transform: `translateX(${(index - currentLogo) * 100}%)`,
+                }}
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={150}
+                  height={80}
+                  className="mx-auto"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
         <hr className="my-6 border-gray-600" />
         <div className="flex flex-wrap items-center justify-between">
           <div className="w-full md:w-4/12 px-4 mx-auto text-center">
