@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc"; // Google icon for the button
 
 function LoginForm() {
   const router = useRouter();
@@ -10,7 +10,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     // Here you can implement your login logic
@@ -23,33 +23,72 @@ function LoginForm() {
     }
   };
 
+  const handleGoogleLogin = () => {
+    // Handle Google login logic here
+    console.log("Google login clicked");
+    // For example, use OAuth or Firebase authentication
+  };
+
   return (
-    <div className="login-container w-full ">
-      <h2>Login</h2>
-      <form className="login-form" onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            className=" w-full"
-            type="text"
-            id="username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+          Welcome Back
+        </h2>
+        <form className="space-y-4" onSubmit={handleLogin}>
+          <div>
+            <label htmlFor="username" className="block text-gray-700">
+              Username:
+            </label>
+            <input
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">
+              Password:
+            </label>
+            <input
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          {error && (
+            <p className="text-red-500 text-sm animate-pulse">{error}</p>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Login
+          </button>
+        </form>
+
+        {/* Divider */}
+        <div className="my-6 flex items-center justify-center">
+          <span className="border-b border-gray-300 w-1/5"></span>
+          <span className="mx-3 text-gray-500">or</span>
+          <span className="border-b border-gray-300 w-1/5"></span>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            className=" w-full"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-          {error && <p className="animate-pulse">{error}</p>}
-        </div>
-        <button type="submit">Login</button>
-      </form>
+
+        {/* Google Login Button */}
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full flex items-center justify-center bg-white text-gray-700 border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+          <FcGoogle className="mr-3 text-2xl" />
+          Continue with Google
+        </button>
+      </div>
     </div>
   );
 }
