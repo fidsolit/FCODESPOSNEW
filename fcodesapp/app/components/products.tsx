@@ -26,6 +26,7 @@ export default async function Product() {
           key={p._id}
           className="card bg-base-100 shadow-xl mt-10 md:m-3 m-3 max-sm:mx-2 w-full md:w-1/2 lg:w-1/4 "
         >
+          {/* bg-base-100 */}
           <figure>
             <img src="1.jfif" alt="Shoes" />
           </figure>

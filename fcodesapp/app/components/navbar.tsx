@@ -17,7 +17,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg fixed w-full z-50 transition-all duration-300 ease-in-out">
+    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg flex flex-wrap w-full z-50 transition-all duration-300  ease-in-out">
       <div className="container mx-auto px-4 flex justify-between items-center py-3">
         {/* Logo with White Background Fix */}
         <Link href={"/"} className="flex items-center space-x-2">
@@ -32,7 +32,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
         </Link>
 
         {/* Main Menu - Desktop */}
-        <div className="hidden md:flex space-x-6 items-center">
+        <div className="hidden  md:flex space-x-6 items-center">
           <Link
             href={"/admindashboard"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
@@ -119,15 +119,15 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-blue-500 transition-all duration-500 ease-in-out overflow-hidden ${
+        className={`md:hidden bg-blue-500 transition-all  duration-500 ease-in-out overflow-hidden flex justify-end ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col items-center space-y-6 py-4">
+        <div className="flex flex-col items-center rounded-sm shadow-md space-y-6 py-4">
           <Link
             href={"/admindashboard"}
             onClick={handleMenuToggle}
-            className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+            className="text-white hover:text-blue-300 hover:bg-sky-50  transition duration-500 ease-in-out font-semibold"
           >
             ADMIN DASHBOARD
           </Link>

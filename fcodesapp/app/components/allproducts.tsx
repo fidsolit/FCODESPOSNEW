@@ -79,8 +79,8 @@ export default function AllProduct() {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="md:w-3/4 lg:w-2/3 mx-auto mt-10 shadow-lg rounded-lg bg-white p-5">
-      <div className="flex justify-between items-center mb-4">
+    <div className="md:w-3/4 lg:w-2/3 mx-auto md:m-15 shadow-lg rounded-lg z-auto bg-white p-5">
+      <div className="flex justify-between items-center mb-4 ">
         <h1 className="text-2xl font-semibold text-gray-800">Product List</h1>
         <Link
           className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg shadow hover:from-blue-600 hover:to-blue-400 transition"

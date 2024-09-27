@@ -5,7 +5,7 @@ import Link from "next/link";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import RemoveBtn from "./removeBtn";
 
-const Productlist = (p) => {
+const Productlist = (p: any) => {
   console.log("this is the p from prodcut list: ");
   return (
     <tr className="hover:bg-slate-200">
