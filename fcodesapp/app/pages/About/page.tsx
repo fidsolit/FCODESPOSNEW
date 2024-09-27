@@ -1,15 +1,34 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const About = () => {
   console.log("You're on the about page");
+
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
+
+  // Array of background images
+  const backgrounds = [
+    "/images/hero-bg.jpg",
+    "/images/hero-bg2.jpg",
+    "/images/hero-bg3.jpg",
+  ];
+
+  // Change background every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
+    }, 3000);
+
+    return () => clearInterval(interval); // Clean up interval on component unmount
+  }, [backgrounds.length]);
 
   return (
     <div>
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-screen"
-        style={{ backgroundImage: 'url("/images/hero-bg.jpg")' }}
+        style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}
       >
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-800 via-purple-700 to-transparent opacity-75"></div>
