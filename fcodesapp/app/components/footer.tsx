@@ -11,7 +11,7 @@ export default function Footer() {
     { src: "/companylogos/company1.jpg", alt: "Noondalton" },
     { src: "/companylogos/company2.jpg", alt: "JJ graphics design services" },
     { src: "/companylogos/company3.jpg", alt: "smarties clothing" },
-    { src: "/companylogos/company3.jpg", alt: "smarties clothing" },
+    { src: "/companylogos/company4.png", alt: "regus" },
   ];
 
   // Automatically change logos every 4 seconds
