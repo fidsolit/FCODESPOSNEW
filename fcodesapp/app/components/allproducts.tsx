@@ -3,6 +3,7 @@ import Link from "next/link";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import RemoveBtn from "./removeBtn";
 import { useState, useEffect } from "react";
+import { FcViewDetails } from "react-icons/fc";
 import { PHASE_PRODUCTION_BUILD } from "next/dist/shared/lib/constants";
 
 // Define a type for the product
@@ -123,7 +124,7 @@ export default function AllProduct() {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-300  hidden md:flex justify-center items-center">
                       <img
                         src="/1.jfif"
                         alt="Product"
@@ -147,6 +148,11 @@ export default function AllProduct() {
                           size={25}
                           className="text-blue-600"
                         />
+                      </button>
+                    </Link>
+                    <Link href={`/productDetails/${p._id}`}>
+                      <button className="hover:scale-110 transition transform">
+                        <FcViewDetails size={25} className="text-blue-600" />
                       </button>
                     </Link>
                   </div>

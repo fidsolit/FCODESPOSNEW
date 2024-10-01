@@ -4,42 +4,33 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// Define prop types for the ProductDescription component
+interface ProductDescriptionProps {
+  id: string;
+  brand: string;
+  description: string;
+  sellingprice: number;
+  product: {
+    brand: string;
+    description: string;
+    sellingprice: number;
+  };
+}
+
 export default function ProductDescription({
   id,
   brand,
   description,
   sellingprice,
   product,
-}) {
-  const [newbrand, setNewbrand] = useState(brand);
-  const [newDescription, setNewDescription] = useState(description);
-  const [sellingPrice, setsellingPrice] = useState(sellingprice);
-  const [products, setproducts] = useState([product]);
-  console.log("this is the products", products);
+}: ProductDescriptionProps) {
+  // State types are inferred from the initial value
+  const [newbrand, setNewbrand] = useState<string>(brand);
+  const [newDescription, setNewDescription] = useState<string>(description);
+  const [sellingPrice, setsellingPrice] = useState<number>(sellingprice);
+  const [products, setproducts] = useState<(typeof product)[]>([product]);
+
   const router = useRouter();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //       },
-  //       body: JSON.stringify({ newbrand, newDescription }),
-  //     });
-
-  //     if (!res.ok) {
-  //       throw new Error("Failed to update product");
-  //     }
-
-  //     router.push("/admindashboard");
-  //     router.refresh();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -68,7 +59,6 @@ export default function ProductDescription({
               </span>
             </div>
             <div className="mb-6">
-              {/* <label htmlfor="size" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">Size</label> */}
               <select
                 id="size"
                 name="size"
@@ -85,9 +75,6 @@ export default function ProductDescription({
                   CHECK OUT
                 </button>
               </Link>
-              {/* <button className="bg-transparent text-zinc-700 dark:text-zinc-300 px-6 py-2 border border-zinc-300 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-700">
-                SAVE TO WISHLIST
-              </button> */}
             </div>
             <div className="flex items-center">
               <a

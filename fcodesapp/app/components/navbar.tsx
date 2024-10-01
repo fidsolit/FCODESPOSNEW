@@ -17,7 +17,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg flex flex-wrap w-full z-50 transition-all duration-300  ease-in-out">
+    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg  flex flex-wrap w-full z-50 transition-all duration-300  ease-in-out">
       <div className="container mx-auto px-4 flex justify-between items-center py-3">
         {/* Logo with White Background Fix */}
         <Link href={"/"} className="flex items-center space-x-2">
