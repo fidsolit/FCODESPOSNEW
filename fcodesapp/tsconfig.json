@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/components/products.jsx",
-    "app/login/page.jsx"
+    "app/login/page.jsx",
+    "stories/navbar.stories.js"
   ],
   "exclude": ["node_modules"]
 }

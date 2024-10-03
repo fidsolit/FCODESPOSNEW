@@ -4,10 +4,26 @@ import TopAgentsChart from "../../components/TopAgentsChart";
 const TopAgent = () => {
   // Sample data for agents
   const agents = [
-    { name: "Angelica Ancajas", performance: 90, image: "/images/agent/-a.png" },
-    { name: "Charles ", performance: 85, image: "/images/agent/-b.png" },
-    { name: "Marylen Dagohoy", performance: 75, image: "/images/agent/-c.png" },
-    { name: "Jonafe Ababa", performance: 60, image: "/images/agent/-d.png" },
+    {
+      name: "Angelica Ancajas",
+      performance: 90,
+      image: "/images/agents/angelica.jpg",
+    },
+    {
+      name: "Charles ",
+      performance: 85,
+      image: "/images/agents/angel pardillo.jpg",
+    },
+    {
+      name: "Marylen Dagohoy",
+      performance: 75,
+      image: "/images/agents/angel pardillo.jpg",
+    },
+    {
+      name: "Jonafe Ababa",
+      performance: 60,
+      image: "/images/agents/angel pardillo.jpg",
+    },
     {
       name: "FLoramer Pardillo",
       performance: 95,

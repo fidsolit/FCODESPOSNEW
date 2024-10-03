@@ -40,20 +40,16 @@ const TopAgentsChart = ({ agents }) => {
     if (chart) {
       const ctx = chart.ctx;
 
-      // Draw images in place of labels on the x-axis
-      chart.options.plugins.afterDraw = function () {
+      // Use afterDraw plugin to draw smaller images below each bar
+      chart.options.plugins.afterDraw = () => {
+        const meta = chart.getDatasetMeta(0); // Get the dataset meta info
+
         agents.forEach((agent, index) => {
-          const imgSize = 30;
-          const x = chart.getDatasetMeta(0).data[index].x - imgSize / 2;
-          const y = chart.scales["x"].bottom + 20;
+          const x = meta.data[index].x - 10; // Adjust x-coordinate for centering image
+          const y = chart.scales["y"].bottom + 10; // Adjust y-coordinate for spacing below the chart
 
-          ctx.drawImage(images[index], x, y, imgSize, imgSize);
-
-          // Draw name below the image
-          ctx.font = "12px Poppins";
-          ctx.fillStyle = "#333";
-          ctx.textAlign = "center";
-          ctx.fillText(agent.name, x + imgSize / 2, y + imgSize + 15);
+          // Draw small agent image (20x20 size)
+          ctx.drawImage(images[index], x, y, 20, 20);
         });
       };
 
@@ -62,7 +58,7 @@ const TopAgentsChart = ({ agents }) => {
   }, [agents]);
 
   const data = {
-    labels: agents.map(() => ""), // Leave labels blank to make room for the images
+    labels: agents.map(() => ""), // Blank labels for the x-axis to avoid overlap
     datasets: [
       {
         label: "Performance",
@@ -104,8 +100,12 @@ const TopAgentsChart = ({ agents }) => {
       },
       tooltip: {
         callbacks: {
+          title: function (tooltipItems) {
+            const index = tooltipItems[0].dataIndex; // Get the index of the hovered bar
+            return agents[index].name; // Display the agent's name in the tooltip
+          },
           label: function (tooltipItem) {
-            return `Performance: ${tooltipItem.raw}%`;
+            return `Performance: ${tooltipItem.raw}%`; // Display the performance as label
           },
         },
       },
@@ -113,7 +113,7 @@ const TopAgentsChart = ({ agents }) => {
     scales: {
       x: {
         ticks: {
-          display: false, // Hide the default x-axis labels (we'll draw them with images)
+          display: false, // Hide the default x-axis labels (we'll draw images here)
         },
       },
       y: {
