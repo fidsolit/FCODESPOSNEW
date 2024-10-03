@@ -40,6 +40,12 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             ADMIN DASHBOARD
           </Link>
           <Link
+            href={"/pages/TopAgent"}
+            className="hover:text-yellow-300 transition duration-300 font-semibold"
+          >
+            TOP AGENTS
+          </Link>
+          <Link
             href={"/store"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
           >

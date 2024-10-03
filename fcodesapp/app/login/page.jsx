@@ -1,27 +1,33 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle } from "react-icons/fc"; // Google icon for the button
 
 function LoginForm() {
-  const { data: session } = useSession();
   const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    // Handle custom login logic here
+
+    // Here you can implement your login logic
+    console.log("Logging in with:", username, password);
+
+    if (username === "admin" && password === "password") {
+      router.push("/admindashboard");
+    } else {
+      setError("Invalid username or password");
+    }
   };
 
   const handleGoogleLogin = () => {
-    signIn("google");
+    // Handle Google login logic here
+    console.log("Google login clicked");
+    // For example, use OAuth or Firebase authentication
   };
-
-  if (session) {
-    // If the user is logged in, redirect to the dashboard
-    router.push("/admindashboard");
-    return null;
-  }
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
@@ -30,9 +36,44 @@ function LoginForm() {
           Welcome Back
         </h2>
         <form className="space-y-4" onSubmit={handleLogin}>
-          {/* Username and Password Fields */}
+          <div>
+            <label htmlFor="username" className="block text-gray-700">
+              Username:
+            </label>
+            <input
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">
+              Password:
+            </label>
+            <input
+              className="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          {error && (
+            <p className="text-red-500 text-sm animate-pulse">{error}</p>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Login
+          </button>
         </form>
 
+        {/* Divider */}
         <div className="my-6 flex items-center justify-center">
           <span className="border-b border-gray-300 w-1/5"></span>
           <span className="mx-3 text-gray-500">or</span>
