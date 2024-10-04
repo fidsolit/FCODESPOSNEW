@@ -21,7 +21,7 @@ const getProductById = async (id) => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch topic");
+      throw new Error("Failed to fetch product");
     }
 
     return res.json();
@@ -33,14 +33,16 @@ const getProductById = async (id) => {
 export default async function ProductDetails({ params }) {
   const { id } = params;
   const { product } = await getProductById(id);
-  const { brand, description, sellingprice } = product;
+  // const { brand, description, sellingprice, warranty, freebies } = product;
 
   return (
     <ProductDescription
-      id={id}
-      brand={brand}
-      description={description}
-      sellingprice={sellingprice}
+      // id={id}
+      // brand={brand}
+      // description={description}
+      // sellingprice={sellingprice}
+      // product={product}
+      // warranty={warranty}
       product={product}
     />
   );

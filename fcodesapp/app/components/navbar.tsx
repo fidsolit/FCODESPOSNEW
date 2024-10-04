@@ -25,7 +25,8 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             src="/fcodeslogo.png"
             width={40}
             height={40}
-            alt="Logo"
+            alt="
+            o"
             className="bg-white p-1 rounded-sm border-2 border-gray-200 shadow-md" // Handle white background with border
           />
           <span className="text-2xl hidden md:block font-bold">FCODES</span>

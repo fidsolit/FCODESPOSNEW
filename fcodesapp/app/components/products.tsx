@@ -32,7 +32,7 @@ export default async function Product() {
           </figure>
           <div className="card-body">
             <h2 className="card-title">{p.brand}</h2>
-            <p>{p.description}</p>
+            {/* <p>{p.description}</p> */}
             <div className="card-actions justify-end">
               <Link href={`/productDetails/${p._id}`}>
                 <button className="btn btn-primary max-sm:mx-auto">
