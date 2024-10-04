@@ -37,10 +37,10 @@ export default function ProductDescription({
         </p>
         <div className="flex items-center mb-4">
           <span className="text-xl font-bold text-zinc-800 dark:text-zinc-200 mr-2">
-            {products[0].sellingprice}
+            ₱ {Number(products[0].sellingprice).toLocaleString()}
           </span>
           <span className="text-sm text-zinc-500 dark:text-zinc-400 line-through">
-            {products[0].sellingprice + 3000}
+            ₱ {(Number(products[0].sellingprice) + 3000).toLocaleString()}
           </span>
         </div>
         <select

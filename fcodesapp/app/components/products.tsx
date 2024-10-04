@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 const getProducts = async () => {
@@ -18,6 +19,9 @@ const getProducts = async () => {
 
 export default async function Product() {
   const { products } = await getProducts();
+  const handclickAddtocart = () => {
+    console.log("this item will add to cart by angelica");
+  };
 
   return (
     <>
@@ -44,6 +48,14 @@ export default async function Product() {
                   Buy Now
                 </button>
               </Link>
+              {/* <Link href={`/addtocart/${p._id}`}> */}
+              <button
+                onClick={handclickAddtocart}
+                className="btn btn-primary max-sm:mx-auto"
+              >
+                Add to cart
+              </button>
+              {/* </Link> */}
             </div>
           </div>
         </div>
