@@ -3,8 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc"; // Google icon for the button
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import Link from "next/link";
+
+// import { signInWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "@/app/firebase/config";
+
+// import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+// import { auth } from "@/app/firebase/config";
 
 function LoginForm() {
   const router = useRouter();
@@ -80,6 +85,16 @@ function LoginForm() {
           <span className="border-b border-gray-300 w-1/5"></span>
           <span className="mx-3 text-gray-500">or</span>
           <span className="border-b border-gray-300 w-1/5"></span>
+        </div>
+        <div className="mx-3 my-3">
+          {" "}
+          <Link href="/signup">
+            {" "}
+            <p className="mx-3 text-gray-500">
+              {" "}
+              dont have an account? click me
+            </p>
+          </Link>
         </div>
 
         {/* Google Login Button */}
