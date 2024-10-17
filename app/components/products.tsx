@@ -105,12 +105,12 @@ export default function ProductsPage() {
                       Buy Now
                     </button>
                   </Link>
-                  <button
+                  {/* <button
                     onClick={() => console.log(`Added ${p.brand} to cart`)}
                     className="btn btn-primary max-sm:mx-auto"
                   >
                     Add to cart
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

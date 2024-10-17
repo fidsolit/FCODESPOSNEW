@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc"; // Google icon for the button
-import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+// import { auth } from "../firebase/config";
+// import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 const SignupForm = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
