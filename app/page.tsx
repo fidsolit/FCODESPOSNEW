@@ -52,9 +52,8 @@ export default function Home() {
               <Image
                 src={slide.src}
                 alt={slide.alt}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-lg shadow-lg"
+                fill
+                className="rounded-lg object-cover shadow-lg"
               />
               {/* Caption */}
               {/* <div className="absolute bottom-10 left-0 w-full text-center z-10">

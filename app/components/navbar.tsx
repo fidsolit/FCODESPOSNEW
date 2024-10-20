@@ -126,7 +126,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-blue-500 transition-all  duration-500 ease-in-out overflow-hidden flex justify-end ${
+        className={`md:hidden bg-green-500 transition-all  duration-500 ease-in-out overflow-hidden flex justify-end ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >

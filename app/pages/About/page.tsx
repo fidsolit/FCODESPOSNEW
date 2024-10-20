@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const About = () => {
-  console.log("You're on the about page");
+  // console.log("You're on the about page");
 
   const [backgroundIndex, setBackgroundIndex] = useState(0);
 
