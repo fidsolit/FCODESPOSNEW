@@ -4,87 +4,48 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface EditProductFormProps {
+  product: any;
   id: string;
-  brand: string;
-  description: string;
-  sellingprice: string;
-  unitprice: string;
-  availableqty: string;
-  sku: string;
-  ram: string;
-  Videocard: string;
-  storage: string;
-  color: string;
-  inches: string;
-  Freebies: string;
-  Warranty: string;
+  // Modify this type according to your product structure if needed
 }
 
-export default function EditProductForm({
-  id,
-  brand,
-  description,
-  sellingprice,
-  unitprice,
-  availableqty,
-  sku,
-  ram,
-  Videocard,
-  storage,
-  color,
-  inches,
-  Freebies,
-  Warranty,
-}: EditProductFormProps) {
-  const [newBrand, setNewBrand] = useState<string>(brand);
-  const [newDescription, setNewDescription] = useState<string>(description);
-  const [newSellingPrice, setNewSellingPrice] = useState<string>(sellingprice);
-  const [newUnitPrice, setNewUnitPrice] = useState<string>(unitprice);
-  const [newAvailableQty, setNewAvailableQty] = useState<string>(availableqty);
-  const [newSku, setNewSku] = useState<string>(sku);
-  const [newRam, setNewRam] = useState<string>(ram);
-  const [newVideocard, setNewVideocard] = useState<string>(Videocard);
-  const [newStorage, setNewStorage] = useState<string>(storage);
-  const [newColor, setNewColor] = useState<string>(color);
-  const [newInches, setNewInches] = useState<string>(inches);
-  const [newFreebies, setNewFreebies] = useState<string>(Freebies);
-  const [newWarranty, setNewWarranty] = useState<string>(Warranty);
-  const [loading, setLoading] = useState<boolean>(false);
+export default function EditProductForm({ id, product }: EditProductFormProps) {
+  const router = useRouter();
+  console.log("this is the id");
+  // Initialize formData with the product object directly
+  const [formData, setFormData] = useState({ ...product, id });
+  const [idtoUpdate, setidtoUPdate] = useState(id);
+
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const router = useRouter();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData: any) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    console.log("this is the form data", formData);
 
     try {
-      const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          brand: newBrand,
-          description: newDescription,
-          sellingprice: newSellingPrice,
-          unitprice: newUnitPrice,
-          availableqty: newAvailableQty,
-          sku: newSku,
-          ram: newRam,
-          Videocard: newVideocard,
-          storage: newStorage,
-          color: newColor,
-          inches: newInches,
-          Freebies: newFreebies,
-          Warranty: newWarranty,
-        }),
-      });
+      const res = await fetch(
+        `http://localhost:3000/api/products/${idtoUpdate}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-      if (!res.ok) {
-        throw new Error("Failed to update product");
-      }
+      if (!res.ok) throw new Error("Failed to update product");
 
       router.push("/admindashboard");
       router.refresh();
@@ -96,6 +57,22 @@ export default function EditProductForm({
     }
   };
 
+  const formFields = [
+    { label: "Brand", name: "brand" },
+    { label: "Description", name: "description" },
+    { label: "Selling Price", name: "sellingprice" },
+    { label: "Unit Price", name: "unitprice" },
+    { label: "Available Quantity", name: "availableqty" },
+    { label: "SKU", name: "sku" },
+    { label: "RAM", name: "ram" },
+    { label: "Videocard", name: "Videocard" },
+    { label: "Storage", name: "storage" },
+    { label: "Color", name: "color" },
+    { label: "Inches", name: "inches" },
+    { label: "Freebies", name: "Freebies" },
+    { label: "Warranty", name: "Warranty" },
+  ];
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -103,44 +80,21 @@ export default function EditProductForm({
     >
       <h2 className="text-xl font-bold text-center mb-4">Edit Product</h2>
       {error && <div className="text-red-600 mb-2">{error}</div>}
-      {[
-        { label: "Brand", value: newBrand, setter: setNewBrand },
-        {
-          label: "Description",
-          value: newDescription,
-          setter: setNewDescription,
-        },
-        {
-          label: "Selling Price",
-          value: newSellingPrice,
-          setter: setNewSellingPrice,
-        },
-        { label: "Unit Price", value: newUnitPrice, setter: setNewUnitPrice },
-        {
-          label: "Available Quantity",
-          value: newAvailableQty,
-          setter: setNewAvailableQty,
-        },
-        { label: "SKU", value: newSku, setter: setNewSku },
-        { label: "RAM", value: newRam, setter: setNewRam },
-        { label: "Videocard", value: newVideocard, setter: setNewVideocard },
-        { label: "Storage", value: newStorage, setter: setNewStorage },
-        { label: "Color", value: newColor, setter: setNewColor },
-        { label: "Inches", value: newInches, setter: setNewInches },
-        { label: "Freebies", value: newFreebies, setter: setNewFreebies },
-        { label: "Warranty", value: newWarranty, setter: setNewWarranty },
-      ].map(({ label, value, setter }) => (
-        <div key={label} className="flex flex-col">
+
+      {formFields.map(({ label, name }) => (
+        <div key={name} className="flex flex-col">
           <label className="mb-1 text-gray-700">{label}</label>
           <input
-            onChange={(e) => setter(e.target.value)}
-            value={value}
+            name={name}
+            value={formData[name] || ""} // Ensure the input fields have controlled values
+            onChange={handleChange}
             className="border border-slate-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500 transition"
             type="text"
             placeholder={label}
           />
         </div>
       ))}
+
       <button
         className={`bg-green-600 font-bold text-white py-3 px-6 w-full rounded-lg transition duration-200 hover:bg-green-500 ${
           loading ? "opacity-50 cursor-not-allowed" : ""

@@ -153,7 +153,7 @@ export default function Footer() {
             {logos.map((logo, index) => (
               <div
                 key={index}
-                className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
+                className={`absolute inset-0 transition-transform duration-1000 w-full h-full ease-in-out ${
                   index === currentLogo ? "translate-x-0" : "translate-x-full"
                 }`}
                 style={{

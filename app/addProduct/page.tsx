@@ -174,14 +174,16 @@
 //   );
 // }
 
-//short code here :D
+//short code here :D"
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 interface ProductData {
+  id: string;
   brand: string;
+  model: string;
   description: string;
   sellingprice: string;
   unitprice: string;
@@ -198,7 +200,9 @@ interface ProductData {
 
 export default function AddProduct() {
   const [productData, setProductData] = useState<ProductData>({
+    id: "ID-1000",
     brand: "",
+    model: "",
     description: "",
     sellingprice: "",
     unitprice: "",
@@ -215,11 +219,15 @@ export default function AddProduct() {
 
   const router = useRouter();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setProductData({
-      ...productData,
-      [e.target.name]: e.target.value,
-    });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setProductData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log("you add ", e.target.value, " on ", e.target.name);
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -252,7 +260,7 @@ export default function AddProduct() {
           <input
             key={idx}
             name={field}
-            value={productData[field as keyof ProductData]}
+            value={productData[field as keyof ProductData] || ""} // Ensure controlled component
             onChange={handleChange}
             className="border border-indigo-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm"
             placeholder={field.charAt(0).toUpperCase() + field.slice(1)}

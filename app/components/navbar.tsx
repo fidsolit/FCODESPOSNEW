@@ -126,13 +126,15 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-green-500 transition-all  duration-500 ease-in-out overflow-hidden flex justify-end ${
+        className={`md:hiddeng-gradient-to-r from-blue-500 to-indigo-600 transition-all w-full  duration-500 ease-in-out   ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="flex flex-col items-center rounded-sm shadow-md space-y-6 py-4">
           <Link
             href={"/admindashboard"}
+            data-aos="fade-right"
+            data-aos-duration="3000"
             onClick={handleMenuToggle}
             className="text-white hover:text-blue-300 hover:bg-sky-50  transition duration-500 ease-in-out font-semibold"
           >
@@ -141,14 +143,18 @@ export default function Navbar({ isLoggedIn, onLogout }) {
           <Link
             href={"/store"}
             onClick={handleMenuToggle}
-            className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+            data-aos="fade-right"
+            data-aos-duration="3000"
+            className="text-white hover:bg-sky-50 transition duration-300 font-semibold"
           >
             STORE
           </Link>
           <Link
             href={"/pages/About"}
+            data-aos="fade-right"
+            data-aos-duration="3000"
             onClick={handleMenuToggle}
-            className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+            className="text-white hover:bg-sky-50 transition duration-300 font-semibold"
           >
             About
           </Link>
@@ -159,6 +165,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
                 handleMenuToggle();
               }}
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+              data-aos="fade-right"
             >
               Logout
             </button>
@@ -167,6 +174,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               href={"/login"}
               onClick={handleMenuToggle}
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+              data-aos="fade-right"
             >
               Login
             </Link>

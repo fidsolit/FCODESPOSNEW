@@ -1,6 +1,6 @@
 import EditProductForm from "@/app/components/editproductForm";
 
-const getProductById = async (id) => {
+const editProductById = async (id: string) => {
   try {
     const res = await fetch(`http://localhost:3000/api/products/${id}`, {
       cache: "no-store",
@@ -11,6 +11,7 @@ const getProductById = async (id) => {
     }
 
     return res.json();
+    console.log("this is the response", res);
   } catch (error) {
     console.log(error);
   }
@@ -18,21 +19,22 @@ const getProductById = async (id) => {
 
 export default async function EditTopic({ params }) {
   const { id } = params;
-  const { product } = await getProductById(id);
-  const { brand, description } = product;
-  //  brand: String,
-  //   description: String,
-  //   sellingprice: String,
-  //   unitprice: String,
-  //   availableqty: String,
-  //   sku: String,
-  //   ram: String,
-  //   Videocard: String,
-  //   storage: String,
-  //   color: String,
-  //   inches: String,
-  //   Freebies: String,
-  //   Warranty: String,
+  const { product } = await editProductById(id);
+  const {
+    brand,
+    description,
+    sellingprice,
+    unitprice,
+    availableqty,
+    sku,
+    ram,
+    Videocard,
+    storage,
+    color,
+    inches,
+    Freebies,
+    Warranty,
+  } = product;
 
-  return <EditProductForm id={id} brand={brand} description={description} />;
+  return <EditProductForm id={id} product={product} />;
 }
