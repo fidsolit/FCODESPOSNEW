@@ -30,10 +30,27 @@ const services = [
     description: "Scalable and secure cloud infrastructure services.",
     icon: "☁️",
   },
+
   {
     title: "E-commerce Solutions",
     description: "Robust online stores to drive your business growth.",
     icon: "🛒",
+  },
+  {
+    title: "Laptop and Computer Repair",
+    description: "We repair laptops and Computers.",
+    icon: "💻🛠",
+  },
+  {
+    title: "CCTV INSTALLATION",
+    description: "We install CCTV for your security.",
+    icon: "🖲",
+  },
+
+  {
+    title: "Point of Sale",
+    description: "We create POS for your business.",
+    icon: " 📠",
   },
 ];
 
