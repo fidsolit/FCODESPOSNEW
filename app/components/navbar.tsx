@@ -162,7 +162,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             onClick={handleMenuToggle}
             className="text-white hover:bg-sky-50 transition duration-300 font-semibold"
           >
-            About
+            ABOUT
           </Link>
           {isLoggedIn ? (
             <button
@@ -173,7 +173,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
               data-aos="fade-right"
             >
-              Logout
+              LOGOUT
             </button>
           ) : (
             <Link
@@ -182,7 +182,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
               data-aos="fade-right"
             >
-              Login
+              LOGIN
             </Link>
           )}
         </div>
