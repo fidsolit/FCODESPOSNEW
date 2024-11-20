@@ -62,7 +62,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             href={"/pages/About"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
           >
-            About
+            ABOUT
           </Link>
           {isLoggedIn ? (
             <div className="relative">
@@ -85,13 +85,13 @@ export default function Navbar({ isLoggedIn, onLogout }) {
                     href="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
-                    Profile
+                    PROFILE
                   </Link>
                   <button
                     onClick={onLogout}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
-                    Logout
+                    LOGOUT
                   </button>
                 </div>
               )}
@@ -101,7 +101,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               href={"/login"}
               className="hover:text-yellow-300 transition duration-300 font-semibold"
             >
-              Login
+              LOGIN
             </Link>
           )}
         </div>
