@@ -53,6 +53,12 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             STORE
           </Link>
           <Link
+            href={"/services"}
+            className="hover:text-yellow-300 transition duration-300 font-semibold"
+          >
+            SERVICES
+          </Link>
+          <Link
             href={"/pages/About"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
           >
