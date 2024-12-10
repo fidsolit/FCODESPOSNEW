@@ -3,8 +3,18 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increment,
+  decrement,
+  incrementByAmount,
+} from "../Globalredux/Features/counterSlice";
+import { login, logout } from "../Globalredux/Features/authslice";
+import { RootState } from "../Globalredux/store";
+import { useRouter } from "next/navigation";
 
-export default function Navbar({ isLoggedIn, onLogout }) {
+export default function Navbar() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -14,6 +24,20 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // const count = useSelector((state: RootState) => state.counter.value);
+  // const username = useSelector((state: RootState) => state.auth.user);
+  // const islogin = useSelector((state: RootState) => state.auth.isAuthenticated);
+  // const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
+  const authState = useSelector((state: RootState) => state.auth);
+
+  const dispatch = useDispatch();
+
+  const handlelogout = () => {
+    // logout code diri
+    dispatch(logout());
+    router.push("/");
   };
 
   return (
@@ -34,18 +58,24 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
         {/* Main Menu - Desktop */}
         <div className="hidden  md:flex space-x-6 items-center">
-          <Link
-            href={"/admindashboard"}
-            className="hover:text-yellow-300 transition duration-300 font-semibold"
-          >
-            ADMIN DASHBOARD
-          </Link>
+          {authState.isAdmin ? (
+            <>
+              <Link
+                href={"/admindashboard"}
+                className="hover:text-yellow-300 transition duration-300 font-semibold"
+              >
+                ADMIN DASHBOARD
+              </Link>
+            </>
+          ) : null}
+
           <Link
             href={"/pages/TopAgent"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
           >
             TOP AGENTS
           </Link>
+
           <Link
             href={"/store"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
@@ -64,13 +94,13 @@ export default function Navbar({ isLoggedIn, onLogout }) {
           >
             ABOUT
           </Link>
-          {isLoggedIn ? (
+          {authState.isAuthenticated ? (
             <div className="relative">
               <button
                 onClick={handleDropdownToggle}
                 className="hover:text-yellow-300 transition duration-300 font-semibold"
               >
-                Profile
+                {authState.user}
               </button>
               {/* Dropdown Menu */}
               {isDropdownOpen && (
@@ -88,7 +118,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
                     PROFILE
                   </Link>
                   <button
-                    onClick={onLogout}
+                    onClick={handlelogout}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
                     LOGOUT
@@ -164,10 +194,10 @@ export default function Navbar({ isLoggedIn, onLogout }) {
           >
             ABOUT
           </Link>
-          {isLoggedIn ? (
+          {authState.isAuthenticate ? (
             <button
               onClick={() => {
-                onLogout();
+                // onLogout();
                 handleMenuToggle();
               }}
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"

@@ -4,6 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc"; // Google icon for the button
 import Link from "next/link";
+import { login } from "../Globalredux/Features/authslice";
+
+import { useSelector, useDispatch } from "react-redux";
+
+import { RootState } from "../Globalredux/store";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { auth } from "@/app/firebase/config";
@@ -12,6 +17,7 @@ import Link from "next/link";
 // import { auth } from "@/app/firebase/config";
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +30,21 @@ function LoginForm() {
     console.log("Logging in with:", username, password);
 
     if (username === "admin" && password === "password") {
+      dispatch(
+        login({
+          user: username,
+          isAdmin: true,
+        })
+      );
       router.push("/admindashboard");
+    }
+    if (username === "user" && password === "user") {
+      dispatch(
+        login({
+          user: username,
+        })
+      );
+      router.push("/store");
     } else {
       setError("Invalid username or password");
     }
@@ -75,6 +95,7 @@ function LoginForm() {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            onClick={handleLogin}
           >
             Login
           </button>

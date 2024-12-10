@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar";
+import { Providers } from "./Globalredux/provider";
 // import { Provider } from "react-redux";
 // import { store } from "./redux/store";
 import Footer from "./components/footer";
@@ -22,12 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Provider store={store}> */}
-        <Navbar isLoggedIn={false} onLogout={true} />
-        {children}
+        <Providers>
+          <Navbar isLoggedIn={false} onLogout={true} />
+          {children}
 
-        <Footer />
-        {/* </Provider> */}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
