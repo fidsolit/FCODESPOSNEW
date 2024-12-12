@@ -3,8 +3,19 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increment,
+  decrement,
+  incrementByAmount,
+} from "../Globalredux/Features/counterSlice";
+// import { login, logout } from "../Globalredux/Features/authslice";
+import { login, logout } from "../Globalredux/Features/authslice";
+import { RootState } from "../Globalredux/store";
+import { useRouter } from "next/navigation";
 
-export default function Navbar({ isLoggedIn, onLogout }) {
+export default function Navbar() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -14,6 +25,20 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // const count = useSelector((state: RootState) => state.counter.value);
+  // const username = useSelector((state: RootState) => state.auth.user);
+  // const islogin = useSelector((state: RootState) => state.auth.isAuthenticated);
+  // const isAdmin = useSelector((state: RootState) => state.auth.isAdmin);
+  const authState = useSelector((state: RootState) => state.auth);
+
+  const dispatch = useDispatch();
+
+  const handlelogout = () => {
+    // logout code diri
+    dispatch(logout());
+    router.push("/");
   };
 
   return (
@@ -34,18 +59,24 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
         {/* Main Menu - Desktop */}
         <div className="hidden  md:flex space-x-6 items-center">
-          <Link
-            href={"/admindashboard"}
-            className="hover:text-yellow-300 transition duration-300 font-semibold"
-          >
-            ADMIN DASHBOARD
-          </Link>
+          {authState.isAdmin ? (
+            <>
+              <Link
+                href={"/admindashboard"}
+                className="hover:text-yellow-300 transition duration-300 font-semibold"
+              >
+                ADMIN DASHBOARD
+              </Link>
+            </>
+          ) : null}
+
           <Link
             href={"/pages/TopAgent"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
           >
             TOP AGENTS
           </Link>
+
           <Link
             href={"/store"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
@@ -53,18 +84,24 @@ export default function Navbar({ isLoggedIn, onLogout }) {
             STORE
           </Link>
           <Link
+            href={"/services"}
+            className="hover:text-yellow-300 transition duration-300 font-semibold"
+          >
+            SERVICES
+          </Link>
+          <Link
             href={"/pages/About"}
             className="hover:text-yellow-300 transition duration-300 font-semibold"
           >
-            About
+            ABOUT
           </Link>
-          {isLoggedIn ? (
+          {authState.isAuthenticated ? (
             <div className="relative">
               <button
                 onClick={handleDropdownToggle}
                 className="hover:text-yellow-300 transition duration-300 font-semibold"
               >
-                Profile
+                {authState.user}
               </button>
               {/* Dropdown Menu */}
               {isDropdownOpen && (
@@ -79,13 +116,13 @@ export default function Navbar({ isLoggedIn, onLogout }) {
                     href="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
-                    Profile
+                    PROFILE
                   </Link>
                   <button
-                    onClick={onLogout}
+                    onClick={handlelogout}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                   >
-                    Logout
+                    LOGOUT
                   </button>
                 </div>
               )}
@@ -95,7 +132,7 @@ export default function Navbar({ isLoggedIn, onLogout }) {
               href={"/login"}
               className="hover:text-yellow-300 transition duration-300 font-semibold"
             >
-              Login
+              LOGIN
             </Link>
           )}
         </div>
@@ -126,13 +163,15 @@ export default function Navbar({ isLoggedIn, onLogout }) {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-blue-500 transition-all  duration-500 ease-in-out overflow-hidden flex justify-end ${
+        className={`md:hiddeng-gradient-to-r from-blue-500 to-indigo-600 transition-all w-full  duration-500 ease-in-out   ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="flex flex-col items-center rounded-sm shadow-md space-y-6 py-4">
           <Link
             href={"/admindashboard"}
+            data-aos="fade-right"
+            data-aos-duration="3000"
             onClick={handleMenuToggle}
             className="text-white hover:text-blue-300 hover:bg-sky-50  transition duration-500 ease-in-out font-semibold"
           >
@@ -141,34 +180,40 @@ export default function Navbar({ isLoggedIn, onLogout }) {
           <Link
             href={"/store"}
             onClick={handleMenuToggle}
-            className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+            data-aos="fade-right"
+            data-aos-duration="3000"
+            className="text-white hover:bg-sky-50 transition duration-300 font-semibold"
           >
             STORE
           </Link>
           <Link
             href={"/pages/About"}
+            data-aos="fade-right"
+            data-aos-duration="3000"
             onClick={handleMenuToggle}
-            className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+            className="text-white hover:bg-sky-50 transition duration-300 font-semibold"
           >
-            About
+            ABOUT
           </Link>
-          {isLoggedIn ? (
+          {authState.isAuthenticate ? (
             <button
               onClick={() => {
-                onLogout();
+                // onLogout();
                 handleMenuToggle();
               }}
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+              data-aos="fade-right"
             >
-              Logout
+              LOGOUT
             </button>
           ) : (
             <Link
               href={"/login"}
               onClick={handleMenuToggle}
               className="text-white hover:text-yellow-300 transition duration-300 font-semibold"
+              data-aos="fade-right"
             >
-              Login
+              LOGIN
             </Link>
           )}
         </div>
