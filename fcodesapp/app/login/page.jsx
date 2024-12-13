@@ -36,6 +36,7 @@ function LoginForm() {
           isAdmin: true,
         })
       );
+      alert("welcome admin ", username);
       router.push("/admindashboard");
     }
     if (username === "user" && password === "user") {
