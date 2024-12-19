@@ -19,7 +19,24 @@ const getProductById = async (id) => {
 export default async function EditTopic({ params }) {
   const { id } = params;
   const { product } = await getProductById(id);
-  const { brand, description } = product;
+  // const { brand, description } = product;
+  const { productDetails } = product;
+  console.log("product details from update page", productDetails);
+  const {
+    brand,
+    description,
+    sellingprice,
+    unitprice,
+    availableqty,
+    sku,
+    ram,
+    videocard,
+    storage,
+    color,
+    inches,
+    Freebies,
+    Warranty,
+  } = product;
   //  brand: String,
   //   description: String,
   //   sellingprice: String,
@@ -34,5 +51,22 @@ export default async function EditTopic({ params }) {
   //   Freebies: String,
   //   Warranty: String,
 
-  return <EditProductForm id={id} brand={brand} description={description} />;
+  return (
+    <EditProductForm
+      id={id}
+      brand={brand}
+      description={description}
+      sellingprice={sellingprice}
+      unitprice={unitprice}
+      availableqty={availableqty}
+      sku={sku}
+      ram={ram}
+      Videocard={videocard}
+      storage={storage}
+      color={color}
+      inches={inches}
+      Freebies={Freebies}
+      Warranty={Warranty}
+    />
+  );
 }

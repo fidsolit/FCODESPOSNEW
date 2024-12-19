@@ -51,8 +51,10 @@ export default function EditProductForm({
   const [newWarranty, setNewWarranty] = useState<string>(Warranty);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  // const [productDetails, setproductdetails] = useState<string>(productdetails);
 
   const router = useRouter();
+  // console.log("this is the whole product details", product);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

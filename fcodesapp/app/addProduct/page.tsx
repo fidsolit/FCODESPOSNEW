@@ -187,7 +187,7 @@ interface ProductData {
   unitprice: string;
   availableqty: string;
   sku: string;
-  videocard: string;
+  Videocard: string;
   storage: string;
   color: string;
   ram: string;
@@ -204,7 +204,7 @@ export default function AddProduct() {
     unitprice: "",
     availableqty: "",
     sku: "",
-    videocard: "",
+    Videocard: "",
     storage: "",
     color: "",
     ram: "",
