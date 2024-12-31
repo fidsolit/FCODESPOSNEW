@@ -10,6 +10,7 @@ export async function PUT(request, { params }) {
     brand,
     description,
     availableqty,
+    unitprice,
     sku,
     ram,
     videocard,
